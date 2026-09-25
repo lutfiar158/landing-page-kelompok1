@@ -1,0 +1,16 @@
+{
+  "name": "landing-page-kelompok1",
+  "version": "1.0.0",
+  "description": "hallo",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./style.css --minify",
+    "watch": "tailwindcss -i ./src/input.css -o ./style.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}

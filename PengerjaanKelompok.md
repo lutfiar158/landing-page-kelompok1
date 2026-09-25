@@ -63,3 +63,6 @@ Dimas bertanggung jawab membangun bagian isi konten portofolio dan bagian penutu
 - Saling berkomunikasi jika ada kendala saat menjalankan Tailwind atau saat styling.
 - Membaca panduan lengkap dan tips prompt AI di [PRD.md](PRD.md).
 - Menuntaskan tugas bersama sebelum deadline: **Sabtu, 26 September 2026 pukul 18:00 WIB**.
+
+## AI yg digunakan
+- antigravity CLI
