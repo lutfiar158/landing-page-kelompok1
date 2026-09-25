@@ -1,8 +1,8 @@
 # Laporan Pengerjaan Kelompok - Week 1: Build Landing Page
 
 ## Anggota Kelompok
-1. **[Nama Lengkap Lutfi]** (NIM: ................)
-2. **[Nama Lengkap Dimas]** (NIM: ................)
+1. **[Nama Lengkap Lutfi]** (NIM: 2604140069)
+2. **[Nama Lengkap Dimas]** (NIM: 2605090004)
 
 *(Catatan: Aditya sudah tidak berada di dalam kelompok)*
 
