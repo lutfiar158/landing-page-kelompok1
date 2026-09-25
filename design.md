@@ -13,13 +13,13 @@
 
 ## 2. Distribusi Warna (50 - 30 - 20)
 
-### 50% Background Utama: `#FCF9EA` (Warm Cream)
+### 50% Background Utama: `#FFFFFF` (Putih Polos)
 - **Fungsi:** Body background, latar section, background input.
-- **Karakter:** Hangat, tekstur kertas cetak, bukan putih klinis `#FFFFFF`.
+- **Karakter:** Bersih, minimalis, kontras tinggi dan jernih.
 
 ### 30% Struktur & Teks: `#1C1E1F` (Charcoal Black)
 - **Fungsi:** Teks utama (`body`), judul (`h1`, `h2`), border tegas (1px), footer.
-- **Karakter:** Kontras tinggi di atas `#FCF9EA`, bukan hitam mati `#000000`.
+- **Karakter:** Kontras tinggi di atas `#FFFFFF`, bukan hitam mati `#000000`.
 
 ### 20% Aksen: `#134E4A` (Deep Forest Teal)
 - **Fungsi:** Tombol aksi utama (CTA), kartu sorotan, border aktif, tag/badge skill.
@@ -31,10 +31,10 @@
 
 ```css
 :root {
-  --bg-main: #FCF9EA;      /* 50% */
+  --bg-main: #FFFFFF;      /* 50% */
   --text-main: #1C1E1F;    /* 30% */
   --accent: #134E4A;       /* 20% */
-  --accent-text: #FCF9EA;
+  --accent-text: #FFFFFF;
   --border: #1C1E1F;
 }
 

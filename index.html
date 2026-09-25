@@ -8,31 +8,102 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.css">
     <link rel="stylesheet" href="style.css">
+    <script>
+        if (sessionStorage.getItem("visited")) {
+            document.documentElement.classList.add("visited-session");
+        }
+    </script>
+    <style>
+        .visited-session #preloader { display: none !important; }
+    </style>
 </head>
 <body class="bg-cream text-charcoal font-sans antialiased selection:bg-forest selection:text-cream">
 
-    <!-- RIGHT FLOATING NAVBAR (Tanpa Background, Pure Typography & Interactive MagicUI Hover) -->
-    <nav id="side-nav" class="fixed right-4 sm:right-8 md:right-10 top-1/2 -translate-y-1/2 z-50 flex flex-col items-end gap-5 sm:gap-6 font-display select-none transition-colors duration-300 text-charcoal" aria-label="Navigasi Halaman">
-        <a href="#hero" class="group flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm font-bold tracking-wider uppercase transition-all" data-nav="hero">
-            <span class="opacity-0 group-hover:opacity-100 group-hover:translate-x-0 translate-x-2 transition-all duration-300 font-mono text-[10px] text-forest">01</span>
-            <span class="nav-label transition-transform duration-300 group-hover:-translate-x-1 nav-shiny-hover">Beranda</span>
-            <span class="nav-dash w-3 h-0.5 rounded-full bg-current transition-all duration-300 group-hover:w-8 group-hover:bg-forest"></span>
+    <!-- 3D CUBE PRELOADER OVERLAY -->
+    <div id="preloader" class="fixed inset-0 z-[100] flex flex-col justify-between p-6 sm:p-10 md:p-14 bg-charcoal text-cream select-none overflow-hidden">
+        <!-- Top Studio Rail -->
+        <div class="w-full flex items-center justify-between border-b border-cream/15 pb-4">
+            <div class="flex items-center gap-3">
+                <span class="w-2 h-2 rounded-full bg-forest animate-ping"></span>
+                <span class="font-mono text-xs text-cream/70 tracking-widest uppercase">
+                    KELOMPOK 1 · ARCHITECTURE STUDIO
+                </span>
+            </div>
+            <div class="font-mono text-xs text-forest tracking-wider uppercase hidden sm:block">
+                PORTFOLIO WEEK 1
+            </div>
+        </div>
+
+        <!-- Center 3D Isometric Cube Stage -->
+        <div class="my-auto flex flex-col items-center justify-center">
+            <div class="loader-perspective relative w-32 h-32 flex items-center justify-center">
+                <!-- 3D Cube Wrapper -->
+                <div class="cube-3d-wrap relative w-20 h-20">
+                    <!-- Outer Cube Faces -->
+                    <div class="cube-face cube-face-front"></div>
+                    <div class="cube-face cube-face-back"></div>
+                    <div class="cube-face cube-face-right"></div>
+                    <div class="cube-face cube-face-left"></div>
+                    <div class="cube-face cube-face-top"></div>
+                    <div class="cube-face cube-face-bottom"></div>
+
+                    <!-- Inner Pulsing Core Cube -->
+                    <div class="cube-3d-inner relative w-20 h-20">
+                        <div class="inner-face inner-face-front"></div>
+                        <div class="inner-face inner-face-back"></div>
+                        <div class="inner-face inner-face-right"></div>
+                        <div class="inner-face inner-face-left"></div>
+                        <div class="inner-face inner-face-top"></div>
+                        <div class="inner-face inner-face-bottom"></div>
+                    </div>
+                </div>
+
+                <!-- 3D Shadow Plate -->
+                <div class="cube-shadow-plate absolute pointer-events-none"></div>
+            </div>
+
+            <!-- Loading Status Indicator -->
+            <p id="preloader-status" class="mt-10 font-mono text-xs text-cream/60 tracking-wider uppercase text-center">
+                Menginisialisasi sistem...
+            </p>
+        </div>
+
+        <!-- Bottom Metric Counter & Progress Bar Rail -->
+        <div class="w-full max-w-xl mx-auto space-y-3">
+            <div class="flex items-baseline justify-between font-mono">
+                <span class="text-xs text-cream/50 uppercase tracking-widest">Progress</span>
+                <span id="preloader-counter" class="text-3xl sm:text-4xl font-extrabold text-cream font-display">0%</span>
+            </div>
+            <!-- Progress Track -->
+            <div class="w-full h-1 bg-cream/10 rounded-full overflow-hidden">
+                <div id="preloader-bar" class="h-full bg-forest transition-all duration-100 ease-out w-0 rounded-full shadow-[0_0_12px_#134E4A]"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT FLOATING NAVBAR (Mobile Minimalist Dots / Desktop MagicUI Hyper Text) -->
+    <nav id="side-nav" class="fixed right-3 sm:right-5 md:right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col items-end gap-3.5 sm:gap-4 md:gap-6 font-display select-none transition-colors duration-300 text-charcoal" aria-label="Navigasi Halaman">
+        <a href="#hero" class="group flex items-center gap-2 md:gap-3 text-xs sm:text-sm font-bold tracking-wider uppercase transition-all py-1" data-nav="hero">
+            <span class="hidden md:inline-block opacity-0 group-hover:opacity-100 group-hover:translate-x-0 translate-x-2 transition-all duration-300 font-mono text-[10px] text-forest">01</span>
+            <span class="nav-label font-mono hidden md:inline-block transition-transform duration-300 group-hover:-translate-x-1" data-text="BERANDA">BERANDA</span>
+            <span class="nav-dash w-3 h-0.5 rounded-full bg-current transition-all duration-300 group-hover:w-6 md:group-hover:w-8 group-hover:bg-forest"></span>
         </a>
-        <a href="#about" class="group flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm font-bold tracking-wider uppercase transition-all" data-nav="about">
-            <span class="opacity-0 group-hover:opacity-100 group-hover:translate-x-0 translate-x-2 transition-all duration-300 font-mono text-[10px] text-forest">02</span>
-            <span class="nav-label transition-transform duration-300 group-hover:-translate-x-1 nav-shiny-hover">Anggota</span>
-            <span class="nav-dash w-3 h-0.5 rounded-full bg-current transition-all duration-300 group-hover:w-8 group-hover:bg-forest"></span>
+        <a href="#about" class="group flex items-center gap-2 md:gap-3 text-xs sm:text-sm font-bold tracking-wider uppercase transition-all py-1" data-nav="about">
+            <span class="hidden md:inline-block opacity-0 group-hover:opacity-100 group-hover:translate-x-0 translate-x-2 transition-all duration-300 font-mono text-[10px] text-forest">02</span>
+            <span class="nav-label font-mono hidden md:inline-block transition-transform duration-300 group-hover:-translate-x-1" data-text="ANGGOTA">ANGGOTA</span>
+            <span class="nav-dash w-3 h-0.5 rounded-full bg-current transition-all duration-300 group-hover:w-6 md:group-hover:w-8 group-hover:bg-forest"></span>
         </a>
-        <a href="#services" class="group flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm font-bold tracking-wider uppercase transition-all" data-nav="services">
-            <span class="opacity-0 group-hover:opacity-100 group-hover:translate-x-0 translate-x-2 transition-all duration-300 font-mono text-[10px] text-forest">03</span>
-            <span class="nav-label transition-transform duration-300 group-hover:-translate-x-1 nav-shiny-hover">Layanan</span>
-            <span class="nav-dash w-3 h-0.5 rounded-full bg-current transition-all duration-300 group-hover:w-8 group-hover:bg-forest"></span>
+        <a href="#services" class="group flex items-center gap-2 md:gap-3 text-xs sm:text-sm font-bold tracking-wider uppercase transition-all py-1" data-nav="services">
+            <span class="hidden md:inline-block opacity-0 group-hover:opacity-100 group-hover:translate-x-0 translate-x-2 transition-all duration-300 font-mono text-[10px] text-forest">03</span>
+            <span class="nav-label font-mono hidden md:inline-block transition-transform duration-300 group-hover:-translate-x-1" data-text="LAYANAN">LAYANAN</span>
+            <span class="nav-dash w-3 h-0.5 rounded-full bg-current transition-all duration-300 group-hover:w-6 md:group-hover:w-8 group-hover:bg-forest"></span>
         </a>
-        <a href="#contact" class="group flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm font-bold tracking-wider uppercase transition-all" data-nav="contact">
-            <span class="opacity-0 group-hover:opacity-100 group-hover:translate-x-0 translate-x-2 transition-all duration-300 font-mono text-[10px] text-forest">04</span>
-            <span class="nav-label transition-transform duration-300 group-hover:-translate-x-1 nav-shiny-hover">Kontak</span>
-            <span class="nav-dash w-3 h-0.5 rounded-full bg-current transition-all duration-300 group-hover:w-8 group-hover:bg-forest"></span>
+        <a href="#contact" class="group flex items-center gap-2 md:gap-3 text-xs sm:text-sm font-bold tracking-wider uppercase transition-all py-1" data-nav="contact">
+            <span class="hidden md:inline-block opacity-0 group-hover:opacity-100 group-hover:translate-x-0 translate-x-2 transition-all duration-300 font-mono text-[10px] text-forest">04</span>
+            <span class="nav-label font-mono hidden md:inline-block transition-transform duration-300 group-hover:-translate-x-1" data-text="KONTAK">KONTAK</span>
+            <span class="nav-dash w-3 h-0.5 rounded-full bg-current transition-all duration-300 group-hover:w-6 md:group-hover:w-8 group-hover:bg-forest"></span>
         </a>
     </nav>
 
@@ -73,223 +144,411 @@
 
     <!-- SECTION 1: ANGGOTA -->
     <section id="about" class="relative bg-charcoal text-cream h-[320vh]">
-        <!-- Meteors light variant on dark bg -->
-        <div class="sticky top-0 h-screen w-full overflow-hidden pointer-events-none absolute inset-0 z-0" aria-hidden="true">
-            <span class="meteor-light"></span>
-            <span class="meteor-light"></span>
-            <span class="meteor-light"></span>
-            <span class="meteor-light"></span>
-            <span class="meteor-light"></span>
-            <span class="meteor-light"></span>
-            <span class="meteor-light"></span>
-            <span class="meteor-light"></span>
-        </div>
+        <!-- SVG Filter for MagicUI Morphing Text -->
+        <svg id="filters" class="absolute w-0 h-0 overflow-hidden pointer-events-none" aria-hidden="true">
+            <defs>
+                <filter id="threshold">
+                    <feColorMatrix
+                        in="SourceGraphic"
+                        type="matrix"
+                        values="1 0 0 0 0
+                                0 1 0 0 0
+                                0 0 1 0 0
+                                0 0 0 255 -140"
+                    />
+                </filter>
+            </defs>
+        </svg>
 
         <!-- Sticky Viewport Stage (Full Screen 100vw x 100vh) -->
         <div class="sticky top-0 h-screen w-full overflow-hidden z-10">
             <!-- STAGE 1: MagicUI Morphing Text (Full Layar) -->
-            <div id="stage-intro" class="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center px-6 z-10 select-none">
-
+            <div id="stage-intro" class="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center px-6 z-10 select-none will-change-transform">
                 <!-- MagicUI Morphing Text Container -->
-                <div class="relative mx-auto h-24 sm:h-36 md:h-48 w-full max-w-5xl text-center font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-none font-extrabold text-cream select-none tracking-tight" style="filter: url(#threshold) blur(0.6px);">
+                <div class="relative mx-auto h-24 sm:h-36 md:h-44 w-full max-w-5xl text-center font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-none font-black text-cream select-none tracking-tight" style="filter: url(#threshold) blur(0.6px);">
                     <span id="morph-text1" class="absolute inset-x-0 top-0 m-auto inline-block w-full"></span>
                     <span id="morph-text2" class="absolute inset-x-0 top-0 m-auto inline-block w-full"></span>
                 </div>
-
-                <p class="text-cream/60 text-xs sm:text-sm md:text-base mt-8 sm:mt-12 font-mono">
-                    Scroll ke bawah untuk melihat profil tim ↓
-                </p>
             </div>
 
             <!-- STAGE 2: Slide 1 (Lutfi) - Muncul dari Bawah ke Atas, Full 1 Layar -->
-            <div id="slide-lutfi" class="absolute inset-0 w-full h-full bg-charcoal text-cream flex flex-col justify-between px-6 sm:px-12 lg:px-20 py-8 sm:py-12 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-full z-20">
-                <!-- Top Meta Line -->
-                <div class="w-full flex items-center justify-between border-b border-cream/15 pb-4">
-                    <div class="flex items-center gap-3">
-                        <span class="font-display text-xs sm:text-sm font-bold tracking-widest text-forest bg-forest/20 px-3.5 py-1 rounded border border-forest/30">
-                            PROFIL 01 / 02
-                        </span>
-                        <span class="text-xs sm:text-sm text-cream/60 font-mono">NIM: 2604140069</span>
-                    </div>
-                    <span class="text-xs sm:text-sm text-cream/60 uppercase tracking-widest font-mono">Frontend Lead</span>
+            <div id="slide-lutfi" class="absolute inset-0 w-full h-full bg-charcoal text-cream flex flex-col justify-between px-6 sm:px-10 md:px-14 lg:px-20 pr-24 sm:pr-32 md:pr-40 lg:pr-48 py-8 sm:py-12 z-20 will-change-transform border-t border-cream/10 shadow-[0_-25px_60px_rgba(0,0,0,0.8)]">
+                <!-- Top Studio Rail: Cukup Tim Kami Saja -->
+                <div class="w-full flex items-center border-b border-cream/15 pb-4 sm:pb-5">
+                    <span class="font-display text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-cream/90">
+                        Tim Kami
+                    </span>
                 </div>
 
-                <!-- Main Full-Screen Split Grid -->
-                <div class="my-auto py-6 grid md:grid-cols-12 gap-8 lg:gap-16 items-center w-full max-w-7xl mx-auto">
+                <!-- Main Full-Screen Editorial Layout -->
+                <div class="my-auto py-4 sm:py-6 grid lg:grid-cols-12 gap-8 lg:gap-14 items-center w-full max-w-5xl">
                     <!-- Photo Column -->
-                    <div class="md:col-span-5 flex justify-center md:justify-start">
-                        <!-- Sumber foto: Unsplash — Christopher Campbell, potret pria -->
-                        <div class="relative group">
-                            <img
-                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&h=600&q=80"
-                                alt="Foto profil Lutfi"
-                                class="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-3xl object-cover ring-4 ring-forest shadow-[12px_12px_0px_0px_#134E4A]"
-                            >
-                            <span class="absolute -bottom-3 -right-3 bg-forest text-cream text-xs font-bold font-mono px-3 py-1 rounded-full border border-cream/20">
-                                50% Beban Kerja
-                            </span>
+                    <div class="lg:col-span-5 flex justify-center lg:justify-start">
+                        <!-- Sumber foto: Unsplash — Christopher Campbell, potret pria profesional -->
+                        <div class="relative group max-w-[260px] sm:max-w-[300px] lg:max-w-none w-full">
+                            <div class="relative aspect-[4/5] rounded-2xl overflow-hidden border border-cream/20 bg-cream/[0.03] shadow-2xl">
+                                <img
+                                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&h=875&q=80"
+                                    alt="Foto profil Lutfi"
+                                    class="w-full h-full object-cover object-top grayscale-[15%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                                >
+                                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-transparent to-transparent"></div>
+                                <!-- Overlay Tag at Bottom: Hanya NIM -->
+                                <div class="absolute bottom-3 left-3 px-3.5 py-2 rounded-xl bg-charcoal/85 backdrop-blur-md border border-cream/15">
+                                    <span class="font-mono text-xs text-cream/90 font-medium">NIM 2604140069</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Details Column -->
-                    <div class="md:col-span-7 space-y-4 sm:space-y-6 text-left">
+                    <div class="lg:col-span-7 space-y-4 sm:space-y-5 text-left">
                         <div>
-                            <h3 class="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-cream">
+                            <div class="inline-flex items-center gap-2 mb-2">
+                                <span class="text-xs font-mono tracking-wider uppercase text-forest font-semibold">
+                                    Frontend Lead
+                                </span>
+                                <span class="text-cream/30 text-xs">/</span>
+                                <span class="text-xs font-mono text-cream/50">Tugas Week 1</span>
+                            </div>
+                            <h3 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-cream">
                                 Lutfi
                             </h3>
-                            <p class="text-lg sm:text-2xl text-forest font-bold mt-2">
-                                Penanggung Jawab Fondasi Teknis & Bagian Atas Website
+                            <p class="text-base sm:text-lg font-medium text-cream/90 mt-1">
+                                Fondasi Teknis, Semantik HTML5, & Tailwind CLI
                             </p>
                         </div>
-                        <p class="text-sm sm:text-base md:text-lg text-cream/80 leading-relaxed max-w-2xl">
-                            Menginisialisasi seluruh konfigurasi Tailwind CLI dari awal, membangun kerangka HTML5 yang semantik dan terstruktur rapi, menyusun navigasi sticky Navbar dengan anchor responsif, serta mengeksekusi Hero section dengan pencitraan visual meja kerja developer.
+
+                        <p class="text-xs sm:text-sm md:text-base text-cream/70 leading-relaxed font-sans">
+                            Menginisialisasi seluruh arsitektur Tailwind CLI mandiri, merancang kerangka HTML5 yang semantik dan ramah aksesibilitas, serta membangun navigasi responsif dan Hero section berbasis fotografi workstation.
                         </p>
-                        <div class="pt-2">
-                            <p class="text-xs font-semibold text-cream/50 uppercase tracking-wider mb-2.5">Keahlian Utama:</p>
-                            <div class="flex flex-wrap gap-2 sm:gap-2.5">
-                                <span class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded bg-forest text-cream border border-forest">HTML5 Semantik</span>
-                                <span class="px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded bg-cream/5 text-cream/90 border border-cream/15">Tailwind CLI</span>
-                                <span class="px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded bg-cream/5 text-cream/90 border border-cream/15">CSS Grid & Flexbox</span>
-                                <span class="px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded bg-cream/5 text-cream/90 border border-cream/15">Git Version Control</span>
+
+                        <!-- Micro Scope Grid -->
+                        <div class="grid grid-cols-2 gap-3 pt-1 border-t border-cream/10">
+                            <div class="p-3 rounded-lg bg-cream/[0.03] border border-cream/10">
+                                <p class="text-[11px] font-mono text-cream/50 uppercase tracking-wider mb-1">Fokus Modul</p>
+                                <p class="text-xs font-semibold text-cream">Navbar, Hero, & Tailwind Build</p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-cream/[0.03] border border-cream/10">
+                                <p class="text-[11px] font-mono text-cream/50 uppercase tracking-wider mb-1">Standar Teknis</p>
+                                <p class="text-xs font-semibold text-cream">Zero-Bloat, Purged Production</p>
+                            </div>
+                        </div>
+
+                        <!-- Skill Pills -->
+                        <div>
+                            <p class="text-[11px] font-mono text-cream/40 uppercase tracking-wider mb-2">Pilar Keahlian</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 text-xs font-mono font-medium rounded-md bg-cream/[0.06] text-cream/90 border border-cream/15 hover:border-forest hover:text-white transition-colors">HTML5 Semantik</span>
+                                <span class="px-3 py-1 text-xs font-mono font-medium rounded-md bg-cream/[0.06] text-cream/90 border border-cream/15 hover:border-forest hover:text-white transition-colors">Tailwind CLI</span>
+                                <span class="px-3 py-1 text-xs font-mono font-medium rounded-md bg-cream/[0.06] text-cream/90 border border-cream/15 hover:border-forest hover:text-white transition-colors">CSS Grid / Flexbox</span>
+                                <span class="px-3 py-1 text-xs font-mono font-medium rounded-md bg-cream/[0.06] text-cream/90 border border-cream/15 hover:border-forest hover:text-white transition-colors">Git Workflow</span>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Bottom Status Line -->
-                <div class="w-full flex items-center justify-between border-t border-cream/15 pt-4 text-xs font-mono text-cream/50">
-                    <span>Kelompok 1 · Profil Lutfi</span>
-                    <span class="flex items-center gap-1.5 text-cream/70">
-                        Scroll lagi untuk melihat profil Dimas ↓
-                    </span>
                 </div>
             </div>
 
             <!-- STAGE 3: Slide 2 (Dimas) - Muncul dari Bawah ke Atas, Full 1 Layar -->
-            <div id="slide-dimas" class="absolute inset-0 w-full h-full bg-charcoal text-cream flex flex-col justify-between px-6 sm:px-12 lg:px-20 py-8 sm:py-12 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-full z-30">
-                <!-- Top Meta Line -->
-                <div class="w-full flex items-center justify-between border-b border-cream/15 pb-4">
-                    <div class="flex items-center gap-3">
-                        <span class="font-display text-xs sm:text-sm font-bold tracking-widest text-forest bg-forest/20 px-3.5 py-1 rounded border border-forest/30">
-                            PROFIL 02 / 02
-                        </span>
-                        <span class="text-xs sm:text-sm text-cream/60 font-mono">NIM: 2605090004</span>
-                    </div>
-                    <span class="text-xs sm:text-sm text-cream/60 uppercase tracking-widest font-mono">Konten & UI Specialist</span>
+            <div id="slide-dimas" class="absolute inset-0 w-full h-full bg-charcoal text-cream flex flex-col justify-between px-6 sm:px-10 md:px-14 lg:px-20 pr-24 sm:pr-32 md:pr-40 lg:pr-48 py-8 sm:py-12 z-30 will-change-transform border-t border-cream/15 shadow-[0_-30px_70px_rgba(0,0,0,0.9)]">
+                <!-- Top Studio Rail: Cukup Tim Kami Saja -->
+                <div class="w-full flex items-center border-b border-cream/15 pb-4 sm:pb-5">
+                    <span class="font-display text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-cream/90">
+                        Tim Kami
+                    </span>
                 </div>
 
-                <!-- Main Full-Screen Split Grid -->
-                <div class="my-auto py-6 grid md:grid-cols-12 gap-8 lg:gap-16 items-center w-full max-w-7xl mx-auto">
+                <!-- Main Full-Screen Editorial Layout -->
+                <div class="my-auto py-4 sm:py-6 grid lg:grid-cols-12 gap-8 lg:gap-14 items-center w-full max-w-5xl">
                     <!-- Photo Column -->
-                    <div class="md:col-span-5 flex justify-center md:justify-start">
-                        <!-- Sumber foto: Unsplash — Austin Distel, potret pria -->
-                        <div class="relative group">
-                            <img
-                                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&h=600&q=80"
-                                alt="Foto profil Dimas"
-                                class="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-3xl object-cover ring-4 ring-forest shadow-[12px_12px_0px_0px_#134E4A]"
-                            >
-                            <span class="absolute -bottom-3 -right-3 bg-forest text-cream text-xs font-bold font-mono px-3 py-1 rounded-full border border-cream/20">
-                                50% Beban Kerja
-                            </span>
+                    <div class="lg:col-span-5 flex justify-center lg:justify-start">
+                        <!-- Sumber foto: Unsplash — Austin Distel, potret pria profesional -->
+                        <div class="relative group max-w-[260px] sm:max-w-[300px] lg:max-w-none w-full">
+                            <div class="relative aspect-[4/5] rounded-2xl overflow-hidden border border-cream/20 bg-cream/[0.03] shadow-2xl">
+                                <img
+                                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&h=875&q=80"
+                                    alt="Foto profil Dimas"
+                                    class="w-full h-full object-cover object-top grayscale-[15%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                                >
+                                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-transparent to-transparent"></div>
+                                <!-- Overlay Tag at Bottom: Hanya NIM -->
+                                <div class="absolute bottom-3 left-3 px-3.5 py-2 rounded-xl bg-charcoal/85 backdrop-blur-md border border-cream/15">
+                                    <span class="font-mono text-xs text-cream/90 font-medium">NIM 2605090004</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Details Column -->
-                    <div class="md:col-span-7 space-y-4 sm:space-y-6 text-left">
+                    <div class="lg:col-span-7 space-y-4 sm:space-y-5 text-left">
                         <div>
-                            <h3 class="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-cream">
+                            <div class="inline-flex items-center gap-2 mb-2">
+                                <span class="text-xs font-mono tracking-wider uppercase text-forest font-semibold">
+                                    Content & UI Specialist
+                                </span>
+                                <span class="text-cream/30 text-xs">/</span>
+                                <span class="text-xs font-mono text-cream/50">Tugas Week 1</span>
+                            </div>
+                            <h3 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-cream">
                                 Dimas
                             </h3>
-                            <p class="text-lg sm:text-2xl text-forest font-bold mt-2">
-                                Penanggung Jawab Bagian Tengah, Konten, Layanan, & Footer
+                            <p class="text-base sm:text-lg font-medium text-cream/90 mt-1">
+                                Konten Orisinal, Layanan, & Aksesibilitas WCAG
                             </p>
                         </div>
-                        <p class="text-sm sm:text-base md:text-lg text-cream/80 leading-relaxed max-w-2xl">
+
+                        <p class="text-xs sm:text-sm md:text-base text-cream/70 leading-relaxed font-sans">
                             Merumuskan naskah orisinal yang padat dan bebas template AI, mengonseptualisasikan kartu Layanan Kami yang informatif, menata struktur Footer lengkap dengan kanal jejaring, serta menjamin rasio kontras warna lolos uji aksesibilitas WCAG.
                         </p>
-                        <div class="pt-2">
-                            <p class="text-xs font-semibold text-cream/50 uppercase tracking-wider mb-2.5">Keahlian Utama:</p>
-                            <div class="flex flex-wrap gap-2 sm:gap-2.5">
-                                <span class="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded bg-forest text-cream border border-forest">Tailwind UI</span>
-                                <span class="px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded bg-cream/5 text-cream/90 border border-cream/15">Desain Responsif</span>
-                                <span class="px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded bg-cream/5 text-cream/90 border border-cream/15">Aksesibilitas Web</span>
-                                <span class="px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded bg-cream/5 text-cream/90 border border-cream/15">Git & GitHub</span>
+
+                        <!-- Micro Scope Grid -->
+                        <div class="grid grid-cols-2 gap-3 pt-1 border-t border-cream/10">
+                            <div class="p-3 rounded-lg bg-cream/[0.03] border border-cream/10">
+                                <p class="text-[11px] font-mono text-cream/50 uppercase tracking-wider mb-1">Fokus Modul</p>
+                                <p class="text-xs font-semibold text-cream">About Slide, Layanan, & Footer</p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-cream/[0.03] border border-cream/10">
+                                <p class="text-[11px] font-mono text-cream/50 uppercase tracking-wider mb-1">Standar Desain</p>
+                                <p class="text-xs font-semibold text-cream">WCAG AAA, Human Voice</p>
+                            </div>
+                        </div>
+
+                        <!-- Skill Pills -->
+                        <div>
+                            <p class="text-[11px] font-mono text-cream/40 uppercase tracking-wider mb-2">Pilar Keahlian</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 text-xs font-mono font-medium rounded-md bg-cream/[0.06] text-cream/90 border border-cream/15 hover:border-forest hover:text-white transition-colors">Tailwind UI</span>
+                                <span class="px-3 py-1 text-xs font-mono font-medium rounded-md bg-cream/[0.06] text-cream/90 border border-cream/15 hover:border-forest hover:text-white transition-colors">Desain Responsif</span>
+                                <span class="px-3 py-1 text-xs font-mono font-medium rounded-md bg-cream/[0.06] text-cream/90 border border-cream/15 hover:border-forest hover:text-white transition-colors">Aksesibilitas (WCAG)</span>
+                                <span class="px-3 py-1 text-xs font-mono font-medium rounded-md bg-cream/[0.06] text-cream/90 border border-cream/15 hover:border-forest hover:text-white transition-colors">Git & GitHub</span>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Bottom Status Line -->
-                <div class="w-full flex items-center justify-between border-t border-cream/15 pt-4 text-xs font-mono text-cream/50">
-                    <span>Kelompok 1 · Profil Dimas</span>
-                    <span class="flex items-center gap-1.5 text-cream/70">
-                        Lanjut scroll ke Layanan Kami ↓
-                    </span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 2: LAYANAN -->
-    <section id="services" class="max-w-5xl mx-auto px-6 py-20 md:py-28">
-        <p class="text-xs uppercase tracking-widest text-charcoal/40 mb-2">Yang bisa kami kerjakan</p>
-        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-charcoal mb-14">Layanan</h2>
+    <!-- SECTION 2: LAYANAN (Paket yang Transparan) -->
+    <section id="services" class="relative max-w-6xl mx-auto px-6 py-20 md:py-32 overflow-hidden">
+        <!-- MagicUI Meteors Shower Background -->
+        <div id="services-meteors" class="pointer-events-none absolute inset-0 overflow-hidden z-0" aria-hidden="true"></div>
 
-        <div class="space-y-6">
-            <!-- Layanan 1 -->
-            <div class="group border border-charcoal/15 rounded-lg p-6 md:p-8 hover:border-charcoal/40 transition-colors">
-                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                    <div class="max-w-lg">
-                        <h3 class="text-xl font-bold text-charcoal mb-2">Landing Page</h3>
-                        <p class="text-sm text-charcoal/70 leading-relaxed">
-                            Satu halaman untuk satu tujuan: memperkenalkan produk, portofolio,
-                            atau event. Navigasi smooth-scroll, responsif di semua ukuran layar,
-                            HTML semantik yang bisa dibaca screen reader.
-                        </p>
+        <!-- Header -->
+        <div class="relative z-10 text-center max-w-2xl mx-auto mb-14 md:mb-20">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-charcoal font-display">
+                Paket yang transparan
+            </h2>
+            <p class="mt-4 text-sm sm:text-base text-charcoal/70 leading-relaxed font-sans">
+                Pilih paket sesuai skala kebutuhan, atau diskusikan sistem custom sesuai proyekmu.
+            </p>
+        </div>
+
+        <!-- 3 Pricing Cards Grid (MagicUI Magic Card) -->
+        <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+            <!-- Card 1: Company Profile / Landing Page (Highlight / Paling Populer) -->
+            <div class="magic-card magic-card-dark shine-card rounded-2xl bg-forest text-cream p-7 sm:p-8 flex flex-col justify-between border border-forest shadow-xl relative transition-all duration-300 hover:-translate-y-1">
+                <div>
+                    <!-- Badge Paling Populer -->
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-bold tracking-wider uppercase bg-charcoal/40 text-cream border border-cream/20">
+                            <span class="text-xs text-amber-300">★</span> Paling Populer
+                        </span>
                     </div>
-                    <div class="flex flex-wrap gap-1.5 md:flex-shrink-0">
-                        <span class="px-2 py-0.5 text-[11px] rounded bg-forest/10 text-forest border border-forest/15">HTML5</span>
-                        <span class="px-2 py-0.5 text-[11px] rounded bg-forest/10 text-forest border border-forest/15">Tailwind</span>
+
+                    <h3 class="text-xl sm:text-2xl font-bold font-display text-cream">
+                        Company Profile / Landing Page
+                    </h3>
+                    <p class="text-xs sm:text-sm text-cream/80 mt-2.5 leading-relaxed min-h-[44px]">
+                        Cocok untuk website company profile perusahaan, website sekolah dengan penyesuaian profil sesuai keinginan.
+                    </p>
+
+                    <!-- Price -->
+                    <div class="mt-6 pb-6 border-b border-cream/15 flex items-baseline gap-1.5">
+                        <span class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-cream font-display">1jt sampai 3jt</span>
+                        <span class="text-xs text-cream/70 font-mono">/ proyek</span>
                     </div>
+
+                    <!-- Checklist -->
+                    <ul class="mt-6 space-y-3.5 text-xs sm:text-sm text-cream/90 font-sans">
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-cream/20 flex items-center justify-center text-cream flex-shrink-0 text-xs">✓</span>
+                            <span>Landing page hingga 5 section</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-cream/20 flex items-center justify-center text-cream flex-shrink-0 text-xs">✓</span>
+                            <span>Responsive mobile & desktop</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-cream/20 flex items-center justify-center text-cream flex-shrink-0 text-xs">✓</span>
+                            <span>Form kontak WhatsApp</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-cream/20 flex items-center justify-center text-cream flex-shrink-0 text-xs">✓</span>
+                            <span>SEO dasar</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-cream/20 flex items-center justify-center text-cream flex-shrink-0 text-xs">✓</span>
+                            <span>Gratis hosting (3 bulan)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-cream/20 flex items-center justify-center text-cream flex-shrink-0 text-xs">✓</span>
+                            <span>Chatbox AI Assistant</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-cream/20 flex items-center justify-center text-cream flex-shrink-0 text-xs">✓</span>
+                            <span>Estimasi pengerjaan: 3–5 hari</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- CTA -->
+                <div class="mt-8 pt-4">
+                    <a href="#contact" class="w-full py-3.5 px-4 rounded-xl bg-cream text-forest font-bold text-sm flex items-center justify-center gap-2 hover:bg-cream/90 hover:shadow-lg transition-all group font-display tracking-wide">
+                        <span>Diskusikan Proyek</span>
+                        <span class="transition-transform group-hover:translate-x-1.5 font-sans">→</span>
+                    </a>
                 </div>
             </div>
 
-            <!-- Layanan 2 -->
-            <div class="group border border-charcoal/15 rounded-lg p-6 md:p-8 hover:border-charcoal/40 transition-colors">
-                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                    <div class="max-w-lg">
-                        <h3 class="text-xl font-bold text-charcoal mb-2">Slicing Desain ke Tailwind CSS</h3>
-                        <p class="text-sm text-charcoal/70 leading-relaxed">
-                            Terima file Figma atau wireframe, keluarkan kode Tailwind yang bersih.
-                            Tanpa CSS custom yang menumpuk — utility classes saja, di-purge saat build
-                            supaya file akhir tetap kecil.
-                        </p>
+            <!-- Card 2: Skala Menengah -->
+            <div class="magic-card rounded-2xl bg-cream text-charcoal p-7 sm:p-8 flex flex-col justify-between border border-charcoal/15 shadow-sm hover:border-forest/40 hover:shadow-md relative transition-all duration-300 hover:-translate-y-1">
+                <div>
+                    <!-- Spacer agar sejajar dengan Card 1 -->
+                    <div class="h-7 mb-4"></div>
+
+                    <h3 class="text-xl sm:text-2xl font-bold font-display text-charcoal">
+                        Skala Menengah
+                    </h3>
+                    <p class="text-xs sm:text-sm text-charcoal/70 mt-2.5 leading-relaxed min-h-[44px]">
+                        Cocok untuk website & aplikasi dengan kebutuhan standar.
+                    </p>
+
+                    <!-- Price -->
+                    <div class="mt-6 pb-6 border-b border-charcoal/15 flex items-baseline gap-1.5">
+                        <span class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-charcoal font-display">Mulai 5jt</span>
+                        <span class="text-xs text-charcoal/60 font-mono">/ proyek</span>
                     </div>
-                    <div class="flex flex-wrap gap-1.5 md:flex-shrink-0">
-                        <span class="px-2 py-0.5 text-[11px] rounded bg-forest/10 text-forest border border-forest/15">Figma</span>
-                        <span class="px-2 py-0.5 text-[11px] rounded bg-forest/10 text-forest border border-forest/15">CSS</span>
-                    </div>
+
+                    <!-- Checklist -->
+                    <ul class="mt-6 space-y-3.5 text-xs sm:text-sm text-charcoal/80 font-sans">
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-forest/15 flex items-center justify-center text-forest flex-shrink-0 text-xs font-bold">✓</span>
+                            <span>Website / aplikasi siap pakai</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-forest/15 flex items-center justify-center text-forest flex-shrink-0 text-xs font-bold">✓</span>
+                            <span>Desain responsif modern</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-forest/15 flex items-center justify-center text-forest flex-shrink-0 text-xs font-bold">✓</span>
+                            <span>Hingga 10 halaman/modul</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-forest/15 flex items-center justify-center text-forest flex-shrink-0 text-xs font-bold">✓</span>
+                            <span>Revisi tidak terbatas</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-forest/15 flex items-center justify-center text-forest flex-shrink-0 text-xs font-bold">✓</span>
+                            <span>Bisa dikustom sesuai kebutuhan</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-forest/15 flex items-center justify-center text-forest flex-shrink-0 text-xs font-bold">✓</span>
+                            <span>Garansi bug 30 hari</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-forest/15 flex items-center justify-center text-forest flex-shrink-0 text-xs font-bold">✓</span>
+                            <span>Panduan penggunaan</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-forest/15 flex items-center justify-center text-forest flex-shrink-0 text-xs font-bold">✓</span>
+                            <span>Estimasi pengerjaan: 1–2 minggu</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- CTA -->
+                <div class="mt-8 pt-4">
+                    <a href="#contact" class="w-full py-3.5 px-4 rounded-xl bg-forest text-cream font-bold text-sm flex items-center justify-center gap-2 hover:bg-forest/90 hover:shadow-lg transition-all group font-display tracking-wide">
+                        <span>Pilih Paket</span>
+                        <span class="transition-transform group-hover:translate-x-1.5 font-sans">→</span>
+                    </a>
                 </div>
             </div>
 
-            <!-- Layanan 3 -->
-            <div class="group border border-charcoal/15 rounded-lg p-6 md:p-8 hover:border-charcoal/40 transition-colors">
-                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                    <div class="max-w-lg">
-                        <h3 class="text-xl font-bold text-charcoal mb-2">Audit Aksesibilitas</h3>
-                        <p class="text-sm text-charcoal/70 leading-relaxed">
-                            Cek kontras warna (WCAG AA minimum), alt text gambar,
-                            struktur heading, dan navigasi keyboard. Laporannya berisi
-                            masalah spesifik dan cara perbaikinya — bukan skor abstrak.
-                        </p>
+            <!-- Card 3: Sistem Custom -->
+            <div class="magic-card rounded-2xl bg-cream text-charcoal p-7 sm:p-8 flex flex-col justify-between border border-charcoal/15 shadow-sm hover:border-forest/40 hover:shadow-md relative transition-all duration-300 hover:-translate-y-1">
+                <div>
+                    <!-- Spacer agar sejajar dengan Card 1 -->
+                    <div class="h-7 mb-4"></div>
+
+                    <h3 class="text-xl sm:text-2xl font-bold font-display text-charcoal">
+                        Sistem Custom
+                    </h3>
+                    <p class="text-xs sm:text-sm text-charcoal/70 mt-2.5 leading-relaxed min-h-[44px]">
+                        Untuk sistem informasi & aplikasi kompleks sesuai kebutuhan spesifik.
+                    </p>
+
+                    <!-- Price -->
+                    <div class="mt-6 pb-6 border-b border-charcoal/15 flex items-baseline gap-1.5">
+                        <span class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-charcoal font-display">Custom</span>
+                        <span class="text-xs text-charcoal/60 font-mono">/ sesuai scope</span>
                     </div>
-                    <div class="flex flex-wrap gap-1.5 md:flex-shrink-0">
-                        <span class="px-2 py-0.5 text-[11px] rounded bg-forest/10 text-forest border border-forest/15">WCAG</span>
-                        <span class="px-2 py-0.5 text-[11px] rounded bg-forest/10 text-forest border border-forest/15">a11y</span>
-                    </div>
+
+                    <!-- Checklist -->
+                    <ul class="mt-6 space-y-3.5 text-xs sm:text-sm text-charcoal/80 font-sans">
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-forest/15 flex items-center justify-center text-forest flex-shrink-0 text-xs font-bold">✓</span>
+                            <span>Analisa kebutuhan mendalam</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-forest/15 flex items-center justify-center text-forest flex-shrink-0 text-xs font-bold">✓</span>
+                            <span>Arsitektur & database custom</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-forest/15 flex items-center justify-center text-forest flex-shrink-0 text-xs font-bold">✓</span>
+                            <span>Modul tak terbatas</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-forest/15 flex items-center justify-center text-forest flex-shrink-0 text-xs font-bold">✓</span>
+                            <span>Integrasi pihak ketiga / API</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-forest/15 flex items-center justify-center text-forest flex-shrink-0 text-xs font-bold">✓</span>
+                            <span>Multi-platform (web/mobile/desktop)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-forest/15 flex items-center justify-center text-forest flex-shrink-0 text-xs font-bold">✓</span>
+                            <span>Revisi & dukungan prioritas</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-forest/15 flex items-center justify-center text-forest flex-shrink-0 text-xs font-bold">✓</span>
+                            <span>Garansi bug 90 hari</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-forest/15 flex items-center justify-center text-forest flex-shrink-0 text-xs font-bold">✓</span>
+                            <span>Estimasi pengerjaan: 1 bulan</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- CTA -->
+                <div class="mt-8 pt-4">
+                    <a href="#contact" class="w-full py-3.5 px-4 rounded-xl bg-charcoal text-cream font-bold text-sm flex items-center justify-center gap-2 hover:bg-forest transition-all group font-display tracking-wide">
+                        <span>Diskusikan Proyek</span>
+                        <span class="transition-transform group-hover:translate-x-1.5 font-sans">→</span>
+                    </a>
                 </div>
             </div>
+        </div>
+
+        <!-- Bottom Disclaimer Note -->
+        <div class="relative z-10 mt-12 md:mt-16 flex items-center justify-center gap-2 text-xs sm:text-sm text-charcoal/60 text-center font-mono">
+            <svg class="w-4 h-4 text-forest flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" stroke-width="1.75"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 6v6l4 2"/>
+            </svg>
+            <span>Harga dapat menyesuaikan kompleksitas & ruang lingkup proyek. Hubungi untuk penawaran detail.</span>
         </div>
     </section>
 
@@ -316,94 +575,314 @@
         </div>
     </footer>
 
-    <!-- SVG Filter for MagicUI Morphing Text -->
-    <svg id="filters" class="fixed h-0 w-0 pointer-events-none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <defs>
-            <filter id="threshold">
-                <feColorMatrix
-                    in="SourceGraphic"
-                    type="matrix"
-                    values="1 0 0 0 0
-                            0 1 0 0 0
-                            0 0 1 0 0
-                            0 0 0 255 -140"
-                />
-            </filter>
-        </defs>
-    </svg>
+    <!-- Lenis Smooth Scroll Library -->
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
 
-    <!-- Interactive Scripts: MagicUI Morphing Text & Scroll Slide Controller -->
+    <!-- Interactive Scripts: MagicUI Morphing Text, Auto-Slide, & Right Floating Nav -->
     <script>
+        // --- 00. Lenis Smooth Scroll Engine ---
+        // ponytail: Lenis CDN for static HTML; upgrade to @studio-freight/react-lenis if migrating to React/Next.js
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+            touchMultiplier: 1.5,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Smooth scroll handling for all in-page anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#' || !targetId) return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    lenis.scrollTo(targetElement, { offset: 0, duration: 1.2 });
+                }
+            });
+        });
+
+        // --- 0. 3D Geometric Cube Preloader Controller ---
+        (function initPreloader() {
+            // ponytail: sessionStorage bypass for returning visitors; upgrade to localStorage if persistent across browser tabs
+            const preloader = document.getElementById("preloader");
+            const counter = document.getElementById("preloader-counter");
+            const bar = document.getElementById("preloader-bar");
+            const status = document.getElementById("preloader-status");
+            if (!preloader) return;
+
+            // Bypass preloader jika user sudah pernah load di sesi ini
+            if (sessionStorage.getItem("visited")) {
+                preloader.remove();
+                document.body.style.overflow = "";
+                lenis.start();
+                return;
+            }
+            sessionStorage.setItem("visited", "true");
+
+            if (!counter || !bar) return;
+
+            // Kunci scroll saat loading
+            document.body.style.overflow = "hidden";
+            lenis.stop();
+
+            let currentProgress = 0;
+            const targetDuration = 1800; // 1.8 detik transisi mulus
+            const startTime = performance.now();
+
+            const statusSteps = [
+                { at: 20, text: "Memuat arsitektur sistem..." },
+                { at: 55, text: "Merender komponen 3D & MagicUI..." },
+                { at: 85, text: "Menyiapkan tata letak studio..." },
+                { at: 100, text: "Sistem siap." }
+            ];
+
+            function updateLoader(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(100, Math.floor((elapsed / targetDuration) * 100));
+
+                if (progress > currentProgress) {
+                    currentProgress = progress;
+                    counter.textContent = `${currentProgress}%`;
+                    bar.style.width = `${currentProgress}%`;
+
+                    for (let step of statusSteps) {
+                        if (currentProgress >= step.at) {
+                            if (status) status.textContent = step.text;
+                        }
+                    }
+                }
+
+                if (currentProgress < 100) {
+                    requestAnimationFrame(updateLoader);
+                } else {
+                    // Selesai 100%: Tahan 200ms agar user melihat 100%, lalu slide ke atas
+                    setTimeout(() => {
+                        preloader.classList.add("preloader-exit");
+                        document.body.style.overflow = "";
+                        lenis.start();
+
+                        setTimeout(() => {
+                            preloader.style.display = "none";
+                        }, 900);
+                    }, 200);
+                }
+            }
+
+            requestAnimationFrame(updateLoader);
+        })();
+
         // --- 1. MagicUI Morphing Text Engine ---
         (function initMorphingText() {
-            const texts = ["ORANG","" "di balik ini"];
+            const texts = ["", "ORANG", "DI BALIK", "INI", "ORANG DI BALIK INI"];
             const text1 = document.getElementById("morph-text1");
             const text2 = document.getElementById("morph-text2");
-            if (!text1 || !text2) return;
+            const section = document.getElementById("about");
+            if (!text1 || !text2 || !section) return;
 
             let textIndex = 0;
-            const morphTime = 1.5;
-            const cooldownTime = 0.5;
+            const morphTime = 0.75;
+            const cooldownTime = 0.45;
             let morph = 0;
             let cooldown = 0;
             let time = new Date();
+            let isStarted = false;
+            let isFinished = false;
+            let hasTriggeredAutoScroll = false;
+            let startDelayTimer = null;
+
+            // Inisialisasi awal: Kosong total, tidak ada teks sama sekali
+            text1.textContent = "";
+            text2.textContent = "";
+            text1.style.filter = "none";
+            text1.style.opacity = "0%";
+            text2.style.filter = "none";
+            text2.style.opacity = "0%";
 
             function setStyles(fraction) {
+                fraction = Math.max(0.0001, Math.min(1, fraction));
+                const inv = 1 - fraction;
+
                 text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
                 text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
 
-                const inv = 1 - fraction;
-                text1.style.filter = `blur(${Math.min(8 / inv - 8, 100)}px)`;
+                text1.style.filter = `blur(${Math.min(8 / Math.max(0.0001, inv) - 8, 100)}px)`;
                 text1.style.opacity = `${Math.pow(inv, 0.4) * 100}%`;
-
-                text1.textContent = texts[textIndex % texts.length];
-                text2.textContent = texts[(textIndex + 1) % texts.length];
             }
 
             function doMorph() {
                 morph -= cooldown;
                 cooldown = 0;
+
                 let fraction = morph / morphTime;
                 if (fraction > 1) {
-                    cooldown = cooldownTime;
                     fraction = 1;
                 }
+
                 setStyles(fraction);
+
                 if (fraction === 1) {
                     textIndex++;
+                    morph = 0;
+                    text1.textContent = texts[textIndex];
+                    text1.style.filter = "none";
+                    text1.style.opacity = "100%";
+                    text2.textContent = "";
+                    text2.style.filter = "none";
+                    text2.style.opacity = "0%";
+
+                    // Selesai saat sampai di kalimat gabungan utuh "ORANG DI BALIK INI"
+                    if (textIndex >= texts.length - 1) {
+                        isFinished = true;
+                        onMorphComplete();
+                    } else if (textIndex === 1) {
+                        // Kata "ORANG" ditahan 0.6 detik agar terbaca jelas setelah efek kemunculan
+                        cooldown = 0.6;
+                    } else {
+                        cooldown = cooldownTime;
+                    }
                 }
             }
 
             function doCooldown() {
                 morph = 0;
-                text2.style.filter = "none";
-                text2.style.opacity = "100%";
+                text1.textContent = texts[textIndex];
                 text1.style.filter = "none";
-                text1.style.opacity = "0%";
+                text1.style.opacity = "100%";
+                text2.textContent = "";
+                text2.style.filter = "none";
+                text2.style.opacity = "0%";
             }
 
             function animate() {
+                if (isFinished || !isStarted) return;
+
                 requestAnimationFrame(animate);
+
                 const now = new Date();
                 const dt = (now.getTime() - time.getTime()) / 1000;
                 time = now;
 
                 cooldown -= dt;
                 if (cooldown <= 0) {
+                    if (text2.textContent === "" && textIndex < texts.length - 1) {
+                        text2.textContent = texts[textIndex + 1];
+                    }
                     doMorph();
                 } else {
                     doCooldown();
                 }
             }
-            animate();
+
+            function startSequence() {
+                if (isStarted) return;
+                isStarted = true;
+
+                // Tahan selama 0.5 detik dalam keadaan kosong bersih tanpa teks
+                text1.textContent = "";
+                text2.textContent = "";
+                text1.style.opacity = "0%";
+                text2.style.opacity = "0%";
+
+                startDelayTimer = setTimeout(() => {
+                    // Setelah tepat 0.5 detik, kata "ORANG" muncul dengan efek morphing MagicUI
+                    textIndex = 0;
+                    text1.textContent = "";
+                    text1.style.opacity = "0%";
+                    text2.textContent = texts[1]; // "ORANG"
+                    text2.style.opacity = "0%";
+
+                    time = new Date();
+                    cooldown = 0; // Langsung jalankan efek morphing masuk untuk kata "ORANG"
+                    animate();
+                }, 500);
+            }
+
+            function onMorphComplete() {
+                if (hasTriggeredAutoScroll) return;
+                hasTriggeredAutoScroll = true;
+
+                // Jeda 800ms setelah teks gabungan utuh terbaca, lalu otomatis scroll slide ke bawah
+                setTimeout(() => {
+                    const scrollable = section.offsetHeight - window.innerHeight;
+                    const targetScroll = section.offsetTop + scrollable * 0.42;
+
+                    // Otomatis scroll ke bawah menutup teks jika user belum scroll manual
+                    if (window.scrollY < section.offsetTop + scrollable * 0.25) {
+                        lenis.scrollTo(targetScroll, { duration: 1.2 });
+                    }
+                }, 800);
+            }
+
+            // Mulai animasi tepat saat user menyentuh/masuk ke section #about dari hero
+            function checkTrigger() {
+                const rect = section.getBoundingClientRect();
+                // Ketika batas hero habis dan section #about masuk ke viewport
+                if (rect.top <= window.innerHeight * 0.45 && rect.bottom >= window.innerHeight * 0.2) {
+                    if (!isStarted) {
+                        startSequence();
+                    }
+                } else if (rect.top > window.innerHeight * 0.7 && isFinished) {
+                    // Reset jika user kembali ke atas hero section agar bisa diputar ulang
+                    clearTimeout(startDelayTimer);
+                    isStarted = false;
+                    isFinished = false;
+                    hasTriggeredAutoScroll = false;
+                    textIndex = 0;
+                    morph = 0;
+                    cooldown = 0.6;
+                    text1.textContent = "";
+                    text2.textContent = "";
+                    text1.style.filter = "none";
+                    text1.style.opacity = "0%";
+                    text2.style.filter = "none";
+                    text2.style.opacity = "0%";
+                }
+            }
+
+            window.addEventListener("scroll", checkTrigger, { passive: true });
+            window.addEventListener("resize", checkTrigger);
+            checkTrigger();
+
+            // Replay helper saat menu Anggota diklik
+            window.replayMorphingText = function() {
+                clearTimeout(startDelayTimer);
+                isStarted = false;
+                isFinished = false;
+                hasTriggeredAutoScroll = false;
+                textIndex = 0;
+                morph = 0;
+                text1.textContent = "";
+                text2.textContent = "";
+                text1.style.opacity = "0%";
+                text2.style.opacity = "0%";
+                startSequence();
+            };
         })();
 
-        // --- 2. Scroll Slide Controller (Full 1 Layar, Bebas Black Screen Bug) ---
+        // --- 2. Scroll Slide Controller (Cinematic Depth Card Stacking) ---
         (function initScrollSlides() {
+            // ponytail: continuous scroll scrubbing; upgrade to GSAP ScrollTrigger if multi-axis pin needed
             const section = document.getElementById("about");
+            const stageIntro = document.getElementById("stage-intro");
             const slideLutfi = document.getElementById("slide-lutfi");
             const slideDimas = document.getElementById("slide-dimas");
             if (!section || !slideLutfi || !slideDimas) return;
+
+            function easeInOutCubic(x) {
+                return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+            }
+            function easeOutCubic(x) {
+                return 1 - Math.pow(1 - x, 3);
+            }
+
+            let isTicking = false;
 
             function updateSlides() {
                 const rect = section.getBoundingClientRect();
@@ -412,22 +891,99 @@
 
                 const progress = Math.min(Math.max(-rect.top / scrollable, 0), 1);
 
-                if (progress < 0.33) {
-                    // Tahap 1: Morphing Text aktif & terlihat penuh di layar
-                    slideLutfi.style.transform = "translateY(100%)";
-                    slideDimas.style.transform = "translateY(100%)";
-                } else if (progress >= 0.33 && progress < 0.66) {
-                    // Tahap 2: Slide 1 (Lutfi) meluncur naik menutup layar penuh
-                    slideLutfi.style.transform = "translateY(0%)";
-                    slideDimas.style.transform = "translateY(100%)";
+                // 1. Stage Intro: Teks morphing fade & zoom out halus
+                if (stageIntro) {
+                    if (progress < 0.12) {
+                        stageIntro.style.transform = "translate3d(0, 0, 0) scale(1)";
+                        stageIntro.style.opacity = "1";
+                        stageIntro.style.pointerEvents = "auto";
+                    } else if (progress < 0.28) {
+                        const p = (progress - 0.12) / (0.28 - 0.12);
+                        const ease = easeInOutCubic(p);
+                        stageIntro.style.transform = `translate3d(0, ${(-12 * ease).toFixed(2)}%, 0) scale(${(1 - 0.06 * ease).toFixed(3)})`;
+                        stageIntro.style.opacity = `${(1 - ease).toFixed(3)}`;
+                        stageIntro.style.pointerEvents = "none";
+                    } else {
+                        stageIntro.style.opacity = "0";
+                        stageIntro.style.pointerEvents = "none";
+                    }
+                }
+
+                // 2. Slide 1 (Lutfi): Masuk halus -> Pinned -> Melayang mundur & redup saat Dimas masuk
+                if (progress < 0.16) {
+                    slideLutfi.style.transform = "translate3d(0, 100%, 0) scale(0.96)";
+                    slideLutfi.style.opacity = "0";
+                    slideLutfi.style.filter = "none";
+                    slideLutfi.style.pointerEvents = "none";
+                } else if (progress >= 0.16 && progress < 0.38) {
+                    // Masuk dari bawah dengan kurva perlambatan halus (easeOutCubic)
+                    const p = (progress - 0.16) / (0.38 - 0.16);
+                    const ease = easeOutCubic(p);
+                    const translateY = (1 - ease) * 100;
+                    const scale = 0.96 + 0.04 * ease;
+                    slideLutfi.style.transform = `translate3d(0, ${translateY.toFixed(2)}%, 0) scale(${scale.toFixed(3)})`;
+                    slideLutfi.style.opacity = `${Math.min(1, 0.2 + 0.8 * ease).toFixed(3)}`;
+                    slideLutfi.style.filter = "none";
+                    slideLutfi.style.pointerEvents = "auto";
+                } else if (progress >= 0.38 && progress < 0.58) {
+                    // Pinned / waktu baca profil Lutfi
+                    slideLutfi.style.transform = "translate3d(0, 0%, 0) scale(1)";
+                    slideLutfi.style.opacity = "1";
+                    slideLutfi.style.filter = "none";
+                    slideLutfi.style.pointerEvents = "auto";
+                } else if (progress >= 0.58 && progress < 0.80) {
+                    // Keluar: mundur berkedalaman (scale down, naik sedikit, redup/gelap) saat Dimas menumpuk di atasnya
+                    const p = (progress - 0.58) / (0.80 - 0.58);
+                    const ease = easeInOutCubic(p);
+                    const translateY = -10 * ease;
+                    const scale = 1.0 - 0.08 * ease;
+                    const opacity = 1.0 - 0.75 * ease;
+                    const brightness = 1.0 - 0.6 * ease;
+                    slideLutfi.style.transform = `translate3d(0, ${translateY.toFixed(2)}%, 0) scale(${scale.toFixed(3)})`;
+                    slideLutfi.style.opacity = `${opacity.toFixed(3)}`;
+                    slideLutfi.style.filter = `brightness(${brightness.toFixed(2)})`;
+                    slideLutfi.style.pointerEvents = "none";
                 } else {
-                    // Tahap 3: Slide 2 (Dimas) meluncur naik menutup layar penuh
-                    slideLutfi.style.transform = "translateY(0%)";
-                    slideDimas.style.transform = "translateY(0%)";
+                    // Berada di tumpukan belakang
+                    slideLutfi.style.transform = "translate3d(0, -10%, 0) scale(0.92)";
+                    slideLutfi.style.opacity = "0.25";
+                    slideLutfi.style.filter = "brightness(0.4)";
+                    slideLutfi.style.pointerEvents = "none";
+                }
+
+                // 3. Slide 2 (Dimas): Masuk menumpuk di atas Slide 1 -> Pinned
+                if (progress < 0.58) {
+                    slideDimas.style.transform = "translate3d(0, 100%, 0) scale(0.96)";
+                    slideDimas.style.opacity = "0";
+                    slideDimas.style.pointerEvents = "none";
+                } else if (progress >= 0.58 && progress < 0.80) {
+                    // Masuk dari bawah menumpuk di atas Slide Lutfi
+                    const p = (progress - 0.58) / (0.80 - 0.58);
+                    const ease = easeOutCubic(p);
+                    const translateY = (1 - ease) * 100;
+                    const scale = 0.96 + 0.04 * ease;
+                    slideDimas.style.transform = `translate3d(0, ${translateY.toFixed(2)}%, 0) scale(${scale.toFixed(3)})`;
+                    slideDimas.style.opacity = `${Math.min(1, 0.2 + 0.8 * ease).toFixed(3)}`;
+                    slideDimas.style.pointerEvents = "auto";
+                } else {
+                    // Pinned / waktu baca profil Dimas
+                    slideDimas.style.transform = "translate3d(0, 0%, 0) scale(1)";
+                    slideDimas.style.opacity = "1";
+                    slideDimas.style.pointerEvents = "auto";
                 }
             }
 
-            window.addEventListener("scroll", updateSlides, { passive: true });
+            function onScroll() {
+                if (!isTicking) {
+                    requestAnimationFrame(() => {
+                        updateSlides();
+                        isTicking = false;
+                    });
+                    isTicking = true;
+                }
+            }
+
+            window.addEventListener("scroll", onScroll, { passive: true });
             window.addEventListener("resize", updateSlides);
             updateSlides();
         })();
@@ -444,7 +1000,7 @@
                 .filter(Boolean);
 
             function onNavScroll() {
-                // Invert text color when hovering over dark charcoal section #about
+                // Balik warna teks otomatis saat melintasi section #about yang gelap
                 if (aboutSection) {
                     const rect = aboutSection.getBoundingClientRect();
                     const centerY = window.innerHeight / 2;
@@ -457,7 +1013,7 @@
                     }
                 }
 
-                // Active section highlighter
+                // Highlighter section aktif
                 let currentId = "hero";
                 sections.forEach(sec => {
                     const rect = sec.getBoundingClientRect();
@@ -485,9 +1041,110 @@
                 });
             }
 
+            // Hubungkan klik nav "Anggota" dengan replay morphing text
+            navLinks.forEach(link => {
+                if (link.getAttribute("data-nav") === "about") {
+                    link.addEventListener("click", () => {
+                        if (window.replayMorphingText) {
+                            window.replayMorphingText();
+                        }
+                    });
+                }
+            });
+
             window.addEventListener("scroll", onNavScroll, { passive: true });
             window.addEventListener("resize", onNavScroll);
             onNavScroll();
+        })();
+
+        // --- 4. MagicUI Magic Card Spotlight Effect ---
+        (function initMagicCards() {
+            document.querySelectorAll(".magic-card").forEach(card => {
+                card.addEventListener("mousemove", e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty("--mouse-x", `${x}px`);
+                    card.style.setProperty("--mouse-y", `${y}px`);
+                });
+            });
+        })();
+
+        // --- 5. MagicUI Meteors Shower in Services Section ---
+        (function initMeteors() {
+            const container = document.getElementById("services-meteors");
+            if (!container) return;
+            const count = 20;
+            const minDelay = 0.2;
+            const maxDelay = 3.5;
+            const minDuration = 4;
+            const maxDuration = 9;
+
+            for (let i = 0; i < count; i++) {
+                const meteor = document.createElement("span");
+                meteor.className = "meteor pointer-events-none";
+                meteor.style.top = "-5%";
+                meteor.style.left = `${Math.floor(Math.random() * 100)}%`;
+                meteor.style.animationDelay = `${(Math.random() * (maxDelay - minDelay) + minDelay).toFixed(2)}s`;
+                meteor.style.animationDuration = `${Math.floor(Math.random() * (maxDuration - minDuration) + minDuration)}s`;
+                container.appendChild(meteor);
+            }
+        })();
+
+        // --- 6. MagicUI Hyper Text Hover Engine for Navigation Bar ---
+        (function initHyperTextNav() {
+            // ponytail: native rAF scramble for static HTML; upgrade to motion/react when migrating to React/Next.js
+            const navLinks = document.querySelectorAll("#side-nav [data-nav]");
+            const CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const DURATION = 600;
+
+            navLinks.forEach(link => {
+                const label = link.querySelector(".nav-label");
+                if (!label) return;
+
+                const originalText = (label.getAttribute("data-text") || label.textContent).trim().toUpperCase();
+                label.setAttribute("data-text", originalText);
+
+                let isAnimating = false;
+                let animationFrameId = null;
+
+                link.addEventListener("mouseenter", () => {
+                    if (isAnimating) return;
+                    isAnimating = true;
+
+                    const startTime = performance.now();
+                    const length = originalText.length;
+
+                    function animate(currentTime) {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / DURATION, 1);
+                        const iteration = progress * length;
+
+                        let output = "";
+                        for (let i = 0; i < length; i++) {
+                            const char = originalText[i];
+                            if (char === " ") {
+                                output += " ";
+                            } else if (i <= iteration) {
+                                output += char;
+                            } else {
+                                output += CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
+                            }
+                        }
+
+                        label.textContent = output;
+
+                        if (progress < 1) {
+                            animationFrameId = requestAnimationFrame(animate);
+                        } else {
+                            label.textContent = originalText;
+                            isAnimating = false;
+                        }
+                    }
+
+                    animationFrameId = requestAnimationFrame(animate);
+                });
+            });
         })();
     </script>
 </body>
