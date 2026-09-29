@@ -1,68 +1,64 @@
-# Laporan Pengerjaan Kelompok - Week 1: Build Landing Page
+# Laporan Pengerjaan Kelompok - Week 2: Refactoring with ReactJS and Deploy on Vercel
 
 ## Anggota Kelompok
-1. **[Nama Lengkap Lutfi]** (NIM: 2604140069)
-2. **[Nama Lengkap Dimas]** (NIM: 2605090004)
+1. **[Nama Lengkap Lutfi]** (NIM: ................)
+2. **[Nama Lengkap Dimas]** (NIM: ................)
 
 *(Catatan: Aditya sudah tidak berada di dalam kelompok)*
 
 ---
 
-## Ringkasan Pembagian Tugas (Bagi Rata 50:50)
+## Peta Refactoring dari Tugas Week 1 ke Week 2
 
-Agar pengerjaan tidak berat sebelah dan tidak saling tumpang tindih, pengerjaan dibagi menjadi dua bagian:
+Tugas Week 2 adalah merombak website landing page HTML & Tailwind CSS dari Week 1 menjadi website modern berbasis ReactJS (Vite), React Router DOM, dan dideploy ke Vercel. 
 
----
-
-### 1. Tugas Lutfi (Pondasi Teknis & Bagian Atas)
-
-Lutfi bertanggung jawab menyiapkan halaman dan membangun bagian atas website:
-
-1. **Setup File & Tailwind CLI:**
-   - Memastikan `index.html` dan Tailwind CLI terhubung dengan baik (`style.css`).
-   - Membuat kerangka tag HTML dasar (`<!DOCTYPE html>`, `<html class="scroll-smooth">`, `<head>`, `<body>`).
-2. **Bagian Navbar (`<nav>`):**
-   - Membuat logo atau nama di sisi kiri.
-   - Membuat tepat 2 link navigasi yang bisa diklik dan bergeser otomatis: `#about` (Tentang) dan `#projects` (Proyek).
-   - Membuat 1 tombol Call-to-Action (CTA) di sebelah kanan, misal: "Hubungi Saya".
-3. **Bagian Hero Section (`<header>`):**
-   - Menuliskan sapaan & judul menarik (Headline) sebagai calon Web Developer.
-   - Menuliskan 1-2 kalimat deskripsi singkat tentang diri sendiri (tanpa *Lorem Ipsum*).
-   - Memasang 1 foto profil/ilustrasi dari Unsplash/Pexels, menyertakan atribut `alt`, dan mencantumkan sumber di komentar kode.
-   - Membuat 1 tombol aksi, misalnya "Lihat Karya".
-4. **Dokumentasi:**
-   - Menuliskan cara menjalankan Tailwind CLI pada file `ReadME.md`.
-
-> **Tips buat Lutfi:** Kamu bisa langsung pakai prompt AI yang ada di file `PRD.md` bagian "Prompt AI 1" dan "Prompt AI 2" jika butuh bantuan menyusun kodenya.
+Setiap anggota bertanggung jawab mengonversi bagian yang sudah dikerjakannya di Week 1 menjadi komponen React, ditambah fitur-fitur baru Week 2 yang dibagi rata 50:50:
 
 ---
 
-### 2. Tugas Dimas (Konten Tengah, Karya, & Footer)
+### 1. Tugas Lutfi (Refactoring Bagian Atas & Setup Arsitektur React)
 
-Dimas bertanggung jawab membangun bagian isi konten portofolio dan bagian penutup website:
+Lutfi mengonversi pekerjaan Week 1 miliknya (Navbar dan Hero) serta membangun fondasi arsitektur React:
 
-1. **Bagian Section 1: Tentang & Keahlian (`<section id="about">`):**
-   - Menuliskan paragraf cerita singkat tentang minat di bidang pemrograman/web development.
-   - Menampilkan minimal 4 keahlian (HTML, CSS, Tailwind CSS, Git) dalam bentuk kartu kecil atau badge yang rapi.
-2. **Bagian Section 2: Proyek Pilihan (`<section id="projects">`):**
-   - Membuat layout grid untuk menampilkan minimal 3 kartu proyek karya.
-   - Setiap kartu berisi gambar contoh proyek (ada `alt` & sumber foto), judul proyek, penjelasan singkat 1-2 kalimat, dan tag teknologi.
-3. **Bagian Footer (`<footer>`):**
-   - Menuliskan nama developer dan copyright tahun 2026.
-   - Menuliskan visi singkat atau kalimat penutup.
-   - Memasang tepat 3 link media sosial (Instagram, LinkedIn, dan GitHub).
-4. **Dokumentasi & Finalisasi:**
-   - Melengkapi penjelasan section di file `ReadME.md` dan mencatat AI apa saja yang digunakan.
-   - Memastikan nama lengkap dan kontribusi tertulis dengan benar di file ini.
+1. **Refactoring Kode Week 1 Milik Lutfi:**
+   - **Navbar:** Mengubah tag `<nav>` HTML lama menjadi `src/components/Navbar.jsx` menggunakan `NavLink`, serta menambahkan state `useState` untuk toggle hamburger menu di layar HP.
+   - **Hero Section:** Mengubah tag `<header>` Hero lama menjadi komponen `src/components/Hero.jsx` yang menerima data lewat props, lalu dipasang di `src/pages/Home.jsx`.
+2. **Tugas Baru Week 2:**
+   - Inisialisasi project ReactJS menggunakan Vite dan setup Tailwind CSS.
+   - Setup konfigurasi React Router DOM pada `src/App.jsx` untuk semua rute (`/`, `/program`, `/tentang`, `/kontak`, `*`).
+   - Membuat layout bersama `src/layouts/MainLayout.jsx` (Navbar + `<Outlet />` + Footer).
+   - Membuat halaman 404 `src/pages/NotFound.jsx`.
+   - Menyiapkan file `vercel.json` agar routing SPA tidak error 404 saat di-refresh.
+   - Menulis panduan setup lokal di `README.md`.
 
-> **Tips buat Dimas:** Kamu bisa langsung pakai prompt AI yang ada di file `PRD.md` bagian "Prompt AI 3", "Prompt AI 4", dan "Prompt AI 5" jika butuh bantuan menyusun kodenya.
+> **Tips buat Lutfi:** Salin prompt siap pakai pada `PRD.md` bagian "Prompt Lutfi 1", "Prompt Lutfi 2", dan "Prompt Lutfi 3" untuk mempermudah pembuatan kodenya.
 
 ---
 
-## Komitmen Kerjasama Tim
-- Saling berkomunikasi jika ada kendala saat menjalankan Tailwind atau saat styling.
-- Membaca panduan lengkap dan tips prompt AI di [PRD.md](PRD.md).
-- Menuntaskan tugas bersama sebelum deadline: **Sabtu, 26 September 2026 pukul 18:00 WIB**.
+### 2. Tugas Dimas (Refactoring Konten/Karya & Fitur Interaktif API)
 
-## AI yg digunakan
-- antigravity CLI
+Dimas mengonversi pekerjaan Week 1 miliknya (Section About, Section Proyek, dan Footer) serta membangun fitur interaktif modal dan formulir kontak API:
+
+1. **Refactoring Kode Week 1 Milik Dimas:**
+   - **Section 1 (Tentang & Keahlian):** Mengubah section About lama menjadi halaman mandiri `src/pages/Tentang.jsx`.
+   - **Section 2 (3 Kartu Proyek):** Memisahkan data teks ke file array `src/data/programs.js`, membuat kartu modular `src/components/Card.jsx`, dan menampilkannya di halaman `src/pages/Program.jsx` menggunakan perulangan `.map()`.
+   - **Footer:** Mengubah tag `<footer>` HTML lama menjadi komponen modular `src/components/Footer.jsx`.
+2. **Tugas Baru Week 2:**
+   - Membuat komponen pembungkus `src/components/Section.jsx` dengan props `title`, `subtitle`, dan `children`.
+   - Membuat komponen pop-up interaktif `src/components/Modal.jsx` menggunakan state `useState` (buka/tutup modal).
+   - Membuat halaman `src/pages/Kontak.jsx` dan `src/components/ContactForm.jsx`.
+   - Mengelola state 3 input (`author`, `title`, `content`) dengan validasi panjang karakter.
+   - Mengintegrasikan pengiriman form via `POST` ke API DevX (`https://devx2026-post.vercel.app/api/posts`) dengan header `Authorization: Bearer DEVX2026`.
+   - Menangani pesan respons API: status 201 (sukses), status 400 (error validasi), dan status 401 (unauthorized).
+   - Melengkapi dokumentasi endpoint API dan AI yang digunakan di `README.md`.
+
+> **Tips buat Dimas:** Salin prompt siap pakai pada `PRD.md` bagian "Prompt Dimas 1", "Prompt Dimas 2", "Prompt Dimas 3", dan "Prompt Dimas 4" untuk mempermudah pengerjaan logika data dan integrasi API.
+
+---
+
+## Tahapan Eksekusi Bersama
+1. **Langkah 1 (Setup Bersama):** Lutfi menyiapkan instalasi Vite React, Tailwind, dan struktur folder.
+2. **Langkah 2 (Migrasi Kode Lama):** Lutfi mengonversi Navbar dan Hero; Dimas mengonversi Tentang, Proyek (Card + mapping array), dan Footer.
+3. **Langkah 3 (Penambahan Fitur Baru):** Lutfi memasang Router di `App.jsx`, `MainLayout.jsx`, dan halaman 404; Dimas menambahkan Modal dan Formulir Kontak API.
+4. **Langkah 4 (Pengujian & Responsivitas):** Uji coba bersama di layar desktop dan mobile (pastikan tidak ada error di console).
+5. **Langkah 5 (Deploy & Kumpul):** Push ke GitHub dan deploy ke Vercel sebelum deadline: **Sabtu, 4 Oktober 2026 pukul 23:59 WIB**.
